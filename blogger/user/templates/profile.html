@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ user.username }}
+{% endblock title %}
+
+
+{% block content %}
+    <aside class="user-data">
+        <div class="mb-2">
+            <img src="{% static 'user/images/default-profile-picture.jpeg' %}" alt="{{ user.username }}'s Profile Picture" class="rounded img-fluid">
+        </div> 
+        <h5 class="text-center">
+            {{ user.username }}
+        </h5>
+        
+        {% comment %}
+            Show user's information based on user settings
+        {% endcomment %}
+
+        {% if user_info.display_email %}
+            <p>
+                Email: {{ user.email }}
+            </p>
+        {% endif %}
+
+        {% if user_info.display_sex %}
+            <p>
+                Sex: {{ user_info.sex }}
+            </p>
+        {% endif %}
+
+        {% if user_info.display_dob %}
+            <p>
+                DoB: {{ user_info.dob }}
+            </p>
+        {% endif %}
+
+        {% if user_info.display_active %}
+            {% if user_info.active %}            
+                <p>
+                    Status: Online
+                </p>
+            {% else %}
+                <p>
+                    Status: Offline
+                </p>
+            {% endif %}
+        {% endif%}
+
+    </aside>
+    <main>
+        <div>
+            <p>
+                This is where the blog posts will go
+            </p>
+        </div>
+    </main>
+{% endblock content %}
