@@ -23,7 +23,6 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user_info'] = UserInfo.objects.get(user=self.object)
-        context['display_options'] = ['email', 'dob', 'sex', 'active']
         return context
 
 
