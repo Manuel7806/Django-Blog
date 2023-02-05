@@ -24,7 +24,3 @@ class ProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         context['user_info'] = UserInfo.objects.get(user=self.object)
         return context
-
-
-class IndexView(TemplateView):
-    template_name = 'home.html'

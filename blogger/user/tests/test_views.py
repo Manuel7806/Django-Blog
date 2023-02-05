@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from user.models import User, UserInfo
 
 
 class TestRegisterView(TestCase):

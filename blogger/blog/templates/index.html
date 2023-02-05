@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock title %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <a href="{% url 'post' post.slug %}">
+                        {{ post.title }}
+                    </a>
+                </div>
+                <div class="card-footer">
+                    <p>
+                        Posted by: <a href="{% url 'profile' post.user.pk %}">
+                            {{ post.user.username }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content%}
