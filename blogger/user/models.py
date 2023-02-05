@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    dob = models.DateField(verbose_name='Date of Birth', blank=True, null=True)
+    display_email = models.BooleanField(default=False)
+
     def __str__(self) -> str:
         return self.username
 

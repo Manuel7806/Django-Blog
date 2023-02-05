@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    Login
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <p class="text-danger">
+                {{ form.username.errors.as_text }}
+            </p>
+            <label for="{{ form.username.label }}" class="form-label">
+                {{ form.username.label }}
+            </label>
+            {{ form.username }}
+        </div>
+        <div class="mb-4">
+            <p class="text-danger">
+                {{ form.password.errors.as_text }}
+            </p>
+            <label for="{{ form.password.label }}" class="form-label">
+                {{ form.password.label }}
+            </label>
+            {{ form.password }}
+        </div>
+        <button class="btn btn-primary" type="submit">
+            Login
+        </button>
+    </form>
+{% endblock content %}
