@@ -6,8 +6,13 @@
 
 .user-data {
     border-right: 1px black solid;
-    margin-right: 15px;
     padding-right: 15px;
     text-align: center;
-    float: left;
+    height: 100%;
+}
+
+.card-header,
+.card-body,
+.card-footer {
+    padding: 10px;
 }
