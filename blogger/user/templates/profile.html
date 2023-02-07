@@ -35,12 +35,14 @@
                     {% for post in posts %}
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a href="{% url 'post' username=user.username slug=post.slug %}">
+                                <a href="{% url 'blog:post' username=user.username slug=post.slug %}">
                                     {{ post.title }}
                                 </a>
                             </div>
                             <div class="card-footer">
-                                Posted Date: 2023-2-6
+                                <p>
+                                    Posted on: {{ post.date_posted }}
+                                </p>
                             </div>
                         </div> 
                     {% endfor %}

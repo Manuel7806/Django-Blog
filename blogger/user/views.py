@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.contrib.auth import authenticate, login
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
-from .forms import RegisterForm
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import RegisterForm, LoginForm
 from .models import User
 from blog.models import Post
 
@@ -14,7 +14,7 @@ class RegisterView(CreateView):
     success_url = reverse_lazy('index')
 
 
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'profile.html'
     context_object_name = 'user'
@@ -23,3 +23,12 @@ class ProfileView(DetailView):
         context = super(ProfileView, self).get_context_data(**kwargs)
         context['posts'] = Post.objects.filter(user=self.object)
         return context
+
+
+class LoginUserView(LoginView):
+    template_name = 'login.html'
+    authentication_form = LoginForm
+
+
+class LogoutUserView(LogoutView):
+    pass

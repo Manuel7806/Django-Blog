@@ -7,6 +7,7 @@ from .forms import CreatePostForm
 
 class IndexView(ListView):
     model = Post
+    paginate_by = 2
     context_object_name = 'posts'
     template_name = 'index.html'
 
