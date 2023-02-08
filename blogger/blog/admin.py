@@ -3,7 +3,7 @@ from .models import Post, Comments
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'post', 'slug', 'user', 'date_posted')
+    list_display = ('title', 'body', 'slug', 'user', 'date_posted')
     prepopulated_fields = {'slug': ('title',)}
 
 

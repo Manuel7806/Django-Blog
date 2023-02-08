@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-footer">
                     <p>
-                        Posted by: <a href="{% url 'user:profile' post.user.pk %}">
+                        Posted by: <a href="{% url 'user:profile' post.user.slug %}">
                             {{ post.user.username }}
                         </a>
                     </p>

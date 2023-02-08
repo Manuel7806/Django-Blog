@@ -18,12 +18,12 @@
         </div>
         <div class="mb-4">
             <p class="text-danger">
-                {{ form.post.errors.as_text }}
+                {{ form.body.errors.as_text }}
             </p>
-            <label for="{{ form.post.label }}" class="form-label">
-                {{ form.post.label }}
+            <label for="{{ form.body.label }}" class="form-label">
+                {{ form.body.label }}
             </label>
-            {{ form.post }}
+            {{ form.body }}
         </div>
         <button class="btn btn-primary" type="submit">
             Submit Post

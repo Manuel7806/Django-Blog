@@ -12,6 +12,11 @@ class User(AbstractUser):
     allow_messages = models.BooleanField(default=True)
     password_reset_token = models.CharField(
         max_length=255, null=True, blank=True)
+    slug = models.SlugField(null=False, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.username

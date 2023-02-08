@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ post.title }}
+    {{ user.username }}
 {% endblock title %}
 
 {% block content %}
@@ -12,9 +12,26 @@
             </div>
             <div class="card-body">
                 <p>
-                    {{ post.post }}
+                    {{ post.body }}
                 </p>
+            </div>
+            <div class="card-footer">
+                Comments: {{ comments.count }}
             </div>
         </div>
     </div>
+    {% if comments.count >= 0 %}
+            {% for comment in comments %}
+                <div class="mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ comment.comment }}
+                        </div>
+                        <div class="card-footer">
+                            Posted By: {{ comment.user }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
 {% endblock content %}
