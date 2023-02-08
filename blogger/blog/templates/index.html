@@ -9,13 +9,13 @@
         <div class="mb-4">
             <div class="card">
                 <div class="card-header">
-                    <a href="{% url 'post' post.slug %}">
+                    <a href="{% url 'blog:post' post.user.username post.slug %}">
                         {{ post.title }}
                     </a>
                 </div>
                 <div class="card-footer">
                     <p>
-                        Posted by: <a href="{% url 'profile' post.user.pk %}">
+                        Posted by: <a href="{% url 'user:profile' post.user.slug %}">
                             {{ post.user.username }}
                         </a>
                     </p>
@@ -23,4 +23,29 @@
             </div>
         </div>
     {% endfor %}
+    <div class="paginator">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">
+                    &laquo; first
+                </a>
+                <a href="?page={{ page.obj.previos_page_number }}" class="ms-2">
+                    previous
+                </a>
+            {% endif %}
+
+                <span class="current">
+                    page {{ page_obj.number }} of {{ page_obj.paginator.num_pages}}
+                </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="me-2">
+                    next
+                </a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">
+                    last &raquo;
+                </a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock content%}

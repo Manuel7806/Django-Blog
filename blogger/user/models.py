@@ -1,40 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.text import slugify
 
 
 class User(AbstractUser):
     dob = models.DateField(verbose_name='Date of Birth', blank=True, null=True)
     display_email = models.BooleanField(default=False)
+    display_dob = models.BooleanField(default=False)
+    email_notifications = models.BooleanField(default=False)
+    allow_friend_request = models.BooleanField(default=True)
+    allow_messages = models.BooleanField(default=True)
+    password_reset_token = models.CharField(
+        max_length=255, null=True, blank=True)
+    slug = models.SlugField(null=False, unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.username)
+        super(User, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return self.username
-
-
-class UserInfo(models.Model):
-    genders = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-        ('NB', 'Non Binary'),
-        ('O', 'Other'),
-    )
-
-    dob = models.DateField('Date of Birth')
-    sex = models.CharField(max_length=25, choices=genders)
-    display_email = models.BooleanField(default=False)
-    display_social_media = models.BooleanField(default=False)
-    display_sex = models.BooleanField(default=False)
-    display_dob = models.BooleanField(default=False)
-    display_active = models.BooleanField(default=True)
-    get_email_notifications = models.BooleanField(default=False)
-    allow_friend_request = models.BooleanField(default=True)
-    allow_messages = models.BooleanField(default=True)
-    active = models.BooleanField(default=False)
-    password_reset_token = models.CharField(max_length=255, null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    @property
-    def is_active(self) -> bool:
-        return self.active
-
-    def __str__(self):
-        return self.user.username

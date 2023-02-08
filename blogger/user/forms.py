@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.hashers import make_password, check_password
-from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 
 
@@ -35,53 +35,31 @@ class RegisterForm(forms.ModelForm):
         }
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=255, widget=forms.TextInput(
-        attrs={'class': 'form-control', 'placeholder': 'Username', 'required': True}))
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        max_length=255, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Username', 'required': True}))
     password = forms.CharField(max_length=255, widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Password', 'required': True}))
 
-    # def clean_username(self):
-    #     username = self.cleaned_data['username']
+    def clean_username(self):
+        username = self.cleaned_data['username']
 
-    #     user = User.objects.filter(username=username)
+        user = User.objects.filter(username=username)
 
-    #     if not user:
-    #         raise forms.ValidationError('Incorrect username')
+        if not user:
+            raise forms.ValidationError('Incorrect username')
 
-    #     return username
+        return username
 
     # def clean_password(self):
-    #     username = self.cleaned_data['username']
+    #     # This is the part I need help with
+
+    #     # NOTE This code does nothing, just used to
+    #     # display the functionality I want to implement
+
     #     password = self.cleaned_data['password']
 
-    #     user = User.objects.filter(username=username)
-
-    #     if user:
-    #         user = User.objects.get(username=username)
-    #         if check_password(password, ):
-    #             return password
-    #         else:
-    #             raise forms.ValidationError('Incorrect Password')
+    #     if not check_password(password):
+    #         raise forms.ValidationError('Incorrect password')
 
     #     return password
-
-    # def clean(self):
-    #     cleaned_data = super().clean()
-
-    #     username = cleaned_data.get('username')
-    #     password = cleaned_data.get('password')
-
-    #     user = User.objects.filter(username=username)
-
-    #     if not user:
-    #         raise forms.ValidationError('Incorrect username')
-
-    #     if user:
-    #         user = User.objects.get(username=username)
-    #         if check_password(password, user.password):
-    #             return cleaned_data
-    #         else:
-    #             raise forms.ValidationError('Incorrect password')
-    #     else:
-    #         raise forms.ValidationError('Incorrect username')

@@ -5,6 +5,15 @@
 {% endblock title %}
 
 {% block content %}
+    <div class="test">
+        {% if form.non_field_erros %}
+            {% for error in form.non_field_erros %}
+                <p class="text-danger">
+                    {{ error }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
     <form method="post">
         {% csrf_token %}
         <div class="mb-4">

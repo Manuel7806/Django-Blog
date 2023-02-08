@@ -8,10 +8,10 @@ class CreatePostForm(forms.ModelForm):
         model = Post
         fields = [
             'title',
-            'post',
+            'body',
         ]
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title', 'required': True}),
-            'post': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your post here.', 'required': True})
+            'body': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Enter your post here.', 'required': True})
         }
