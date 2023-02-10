@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    {{ user.username }}
+    {{ profile_user.username }}
 {% endblock title %}
 
 
@@ -10,21 +10,21 @@
     <div class="row">
         <div class="col-2">
             <aside class="user-data">
-                <img src="{% static 'user/images/default-profile-picture.jpeg' %}" alt="{{ user.username}}'s Profile Picture" class="img-fluid">
+                <img src="{% static 'user/images/default-profile-picture.jpeg' %}" alt="{{ profile_user.username}}'s Profile Picture" class="img-fluid">
                 <h4 class="mt-3">
-                    {{ user.username }}
+                    {{ profile_user.username }}
                 </h4>
                 {% comment %}
                     Show the users information based on the user settings
                 {% endcomment %}
-                {% if user.display_email %}
+                {% if profile_user.display_email %}
                     <p>
-                        Email: {{ user.email }}
+                        Email: {{ profile_user.email }}
                     </p> 
                 {% endif %}
-                {% if user.display_dob and user.dob is not Null %}
+                {% if profile_user.display_dob and profile_user.dob is not Null %}
                     <p>
-                        Birth Date: {{ user.dob }}
+                        Birth Date: {{ profile_user.dob }}
                     </p>
                 {% endif %}
             </aside>
@@ -35,7 +35,7 @@
                     {% for post in posts %}
                         <div class="card mb-4">
                             <div class="card-header">
-                                <a href="{% url 'blog:post' username=user.username slug=post.slug %}">
+                                <a href="{% url 'blog:post' username=profile_user.username slug=post.slug %}">
                                     {{ post.title }}
                                 </a>
                             </div>
@@ -45,11 +45,11 @@
                                 </p>
                             </div>
                         </div> 
-                    {% endfor %}
-                {% else %}
+                    {% empty %}
                         <p>
                             There is nothing to show here yet.
                         </p>
+                    {% endfor %}
                 {% endif %}
             </main>
         </div>

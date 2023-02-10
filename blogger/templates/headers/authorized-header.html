@@ -3,7 +3,7 @@
         Hello, {{ user.username }}
     </span>
     <div class="navbar-nav">
-        <a href="{% url 'user:profile' slug=user.slug %}" class="nav-link">
+        <a href="{% url 'user:profile' user.slug %}" class="nav-link">
             Profile
         </a>
         <a href="{% url 'blog:create' %}" class="nav-link">

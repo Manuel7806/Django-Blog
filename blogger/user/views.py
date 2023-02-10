@@ -1,7 +1,5 @@
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,7 +17,7 @@ class RegisterView(CreateView):
 class ProfileView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'profile.html'
-    context_object_name = 'user'
+    context_object_name = 'profile_user'
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
