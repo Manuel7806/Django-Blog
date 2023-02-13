@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Settings {{ user.username }}
+{% endblock title %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-4">
+            <p class="text-danger">
+                {{ form.username.errors.as_text }}
+            </p>
+            <label for="{{ form.username.label }}" class="form-label">
+                {{ form.username.label }}
+            </label>
+            {{ form.username }}
+        </div>
+        <div class="mb-4">
+            <p class="text-danger">
+                {{ form.email.errors.as_text }}
+            </p>
+            <label for="{{ form.email.label }}" class="form-label">
+                {{ form.email.label }}
+            </label>
+            {{ form.email }}
+        </div>
+        <div class="mb-4">
+            <p class="text-danger">
+                {{ form.dob.errors.as_text }}
+            </p>
+            <label for="{{ form.dob.label }}" class="form-label">
+                {{ form.dob.label }}
+            </label>
+            {{ form.dob }}
+        </div>
+        <div class="mb-4 form-check">
+            <p class="text-danger">
+                {{ form.dislplay_dob.errors.as_text }}
+            </p>
+            <label for="{{ form.display_dob.label }}" class="form-check-label">
+                {{ form.display_dob.label }}
+            </label>
+            {{ form.display_dob }}
+        </div>
+        <div class="mb-4 form-check">
+            <p class="text-danger">
+                {{ form.display_email.errors.as_text }}
+            </p>
+            <label for="{{ form.display_email.label }}" class="form-check-label">
+                {{ form.display_email.label }}
+            </label>
+            {{ form.display_email }}
+        </div>
+        <div class="mb-4 form-check">
+            <p class="text-danger">
+                {{ form.email_notifications.errors.as_text }}
+            </p>
+            <label for="{{ form.email_notifications.label }}" class="form-check-label">
+                {{ form.email_notifications.label }}
+            </label>
+            {{ form.email_notifications }}
+        </div>
+        <div class="mb-4 form-check">
+            <p class="text-danger">
+                {{ form.allow_friend_request.errors.as_text }}
+            </p>
+            <label for="{{ form.allow_friend_request.label }}" class="form-check-label">
+                {{ form.allow_friend_request.label }}
+            </label>
+            {{ form.allow_friend_request }}
+        </div>
+        <div class="mb-4 form-check">
+            <p class="text-danger">
+                {{ form.allow_messages.errors.as_text }}
+            </p>
+            <label for="{{ form.allow_messages.label }}" class="form-check-label">
+                {{ form.allow_messages.label }}
+            </label>
+            {{ form.allow_messages }}
+        </div>
+        <div class="mb-4">
+            <button class="btn btn-primary" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
+{% endblock content %}

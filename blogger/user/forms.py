@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User
 
@@ -63,3 +63,54 @@ class LoginForm(AuthenticationForm):
     #         raise forms.ValidationError('Incorrect password')
 
     #     return password
+
+
+class UserSettingsForm(forms.ModelForm):
+    # def clean_username(self):
+    #     username = self.cleaned_data['username']
+
+    #     user = User.objects.filter(username=username)
+
+    #     if user:
+    #         raise forms.ValidationError('That username is in use already')
+
+    #     return username
+
+    # def clean_email(self):
+    #     email = self.cleaned_data['email']
+
+    #     user_email = User.objects.filter(email=email)
+
+    #     if user_email:
+    #         raise forms.ValidationError('That email is in use already')
+
+    #     return email
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'email',
+            'dob',
+            'display_dob',
+            'display_email',
+            'email_notifications',
+            'allow_friend_request',
+            'allow_messages'
+        ]
+
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'dob': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'YYY-MM-DD'}),
+            'display_dob': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'display_email': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'email_notifications': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'allow_friend_request': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'allow_messages': forms.CheckboxInput(attrs={'class': 'form-check-input'})
+        }
+
+        labels = {
+            'username': 'Change Username',
+            'email': 'Change Email',
+        }
